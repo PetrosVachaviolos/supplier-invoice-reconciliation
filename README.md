@@ -28,7 +28,7 @@ Each unposted entry is matched against SAP records on **4 keys**: VAT ID, Date, 
 | ΒΡΕΘΗΚΑΝ | All 4 keys match exactly |
 | ΛΑΘΟΣ ΑΞΙΑ | VAT + Date + REF match, Amount differs |
 | ΛΑΘΟΣ ΗΜΕΡΟΜΗΝΙΑ | VAT + Amount + REF match, Date differs |
-| ΛΑΘΟΣ ΑΝΑΦΟΡΑ | VAT match only, REF not found |
+| ΛΑΘΟΣ ΑΝΑΦΟΡΑ  |  VAT + Amount + Date match, Reference differs |
 | ΔΕΝ ΒΡΕΘΗΚΑΝ | No SAP record found (likely HALCOR entries) |
 
 ### Reference Number Matching
