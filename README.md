@@ -2,6 +2,11 @@
 
 Automated reconciliation engine that matches unposted supplier invoices against internal SAP records, identifying discrepancies and categorizing them for review.
 
+
+## Workflow
+
+<img src="workflow.png" width="800"/>
+
 ## Business Problem
 
 In large manufacturing environments, supplier invoices submitted to tax authorities (myDATA) must be matched against internal SAP postings. This process was previously done manually — cross-referencing thousands of entries across multiple Excel files, which was time-consuming and error-prone.
