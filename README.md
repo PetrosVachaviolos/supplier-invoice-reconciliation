@@ -22,7 +22,25 @@ This engine automates the entire matching process and produces a structured outp
 | `ΠΡΟΜΗΘΕΥΤΕΣ.xlsx` | SAP export (Power Automate Desktop) | Supplier master data (VAT lookup) |
 | `ΑΚΑΤΑΧΩΡΗΤΑ.xlsx` | Finance team (shared folder) | Combined ELVAL + HALCOR unposted entries |
 
-> In production, `ΕΛΒΑΛ.xlsx` and `ΠΡΟΜΗΘΕΥΤΕΣ.xlsx` are automatically exported from SAP GUI using a Power Automate Desktop + pywinauto automation, eliminating manual data collection entirely.
+> In production, `ΕΛΒΑΛ.xlsx` and `ΠΡΟΜΗΘΕΥΤΕΣ.xlsx` are exported from SAP automatically by [`sap_export.py`](sap_export.py), using the **SAP GUI Scripting API** — eliminating manual data collection entirely.
+
+### SAP export (`sap_export.py`)
+
+Originally a Power Automate Desktop flow (recorded clicks and `SendKeys`); now driven by element IDs through SAP GUI Scripting:
+
+- **Supplier master** — LFA1 through a table-display transaction, in display mode only → Excel
+- **Vendor line items** — FBL1N with vendor ranges (multiple selection), company code, all items, posting-date window and a saved layout → Excel
+- One login for both exports, a system-wide mutex so no two SAP automations collide, credentials from the Windows Credential Manager, nothing ever saved in SAP
+
+Production lessons built in:
+
+| Problem seen in production | Handling |
+|---|---|
+| The table export answered *"File does not exist"* | It only overwrites existing files → an empty workbook is created first and the script waits for it to **change** |
+| Export target with non-ASCII folder/file names | SAP writes to an ASCII temp folder; Python moves the file to its final name |
+| ~27k-row table arrives in packages, *"memory low"* warning | Export starts only after the grid holds every row from the window title |
+| A previous run's file could be mistaken for the new one | Completion = modification time changed **and** size stopped growing |
+| Failures were hard to diagnose | Each step logs the status bar, open windows and the dialog fields as SAP reads them back |
 
 ### Matching Logic
 
@@ -49,6 +67,7 @@ Suppliers often submit reference numbers in different formats than internal SAP 
 - Python 3
 - pandas
 - openpyxl
+- SAP GUI Scripting (win32com) — `sap_export.py`, Windows + SAP GUI only
 
 ## Usage
 
