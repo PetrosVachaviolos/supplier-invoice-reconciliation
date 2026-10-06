@@ -26,7 +26,7 @@ This engine automates the entire matching process and produces a structured outp
 
 ### SAP export (`sap_export.py`)
 
-Originally a Power Automate Desktop flow (recorded clicks and `SendKeys`); now driven by element IDs through SAP GUI Scripting:
+Originally a Power Automate Desktop flow (recorded clicks and `SendKeys` — [previous workflow](legacy/workflow_pad.png)); now driven by element IDs through SAP GUI Scripting:
 
 - **Supplier master** — LFA1 through a table-display transaction, in display mode only → Excel
 - **Vendor line items** — FBL1N with vendor ranges (multiple selection), company code, all items, posting-date window and a saved layout → Excel
