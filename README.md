@@ -92,3 +92,7 @@ The script runs in two phases:
 Petros Vachaviolos — Business Intelligence & Process Automation Specialist
 
 [LinkedIn](https://www.linkedin.com/in/petros-vachaviolos)
+
+## License
+
+Copyright (c) 2026 Petros Vachaviolos. All rights reserved. Proprietary; shown here as a portfolio. No use, copying or redistribution without the author's written permission. See [LICENSE.txt](LICENSE.txt).
